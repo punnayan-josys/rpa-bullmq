@@ -1,0 +1,26 @@
+{
+  "name": "rpa-failed-job-handler",
+  "version": "1.0.0",
+  "description": "Lambda function to handle permanently failed RPA jobs",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --production",
+    "deploy": "zip -r failed-job-handler.zip . && aws lambda update-function-code --function-name rpa-failed-job-handler --zip-file fileb://failed-job-handler.zip"
+  },
+  "dependencies": {
+    "ioredis": "^5.3.2",
+    "bullmq": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0"
+  },
+  "keywords": [
+    "rpa",
+    "lambda",
+    "redis",
+    "bullmq",
+    "job-handling"
+  ],
+  "author": "RPA Team",
+  "license": "MIT"
+}

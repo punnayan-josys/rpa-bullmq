@@ -1,0 +1,16 @@
+{
+  "PolicyName": "rpa-backend-autoscaling",
+  "ServiceNamespace": "ecs",
+  "ResourceId": "service/rpa-cluster/rpa-backend-service",
+  "ScalableDimension": "ecs:service:DesiredCount",
+  "PolicyType": "TargetTrackingScaling",
+  "TargetTrackingScalingPolicyConfiguration": {
+    "TargetValue": 70.0,
+    "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "ECSServiceAverageCPUUtilization"
+    },
+    "ScaleOutCooldown": 300,
+    "ScaleInCooldown": 300,
+    "DisableScaleIn": false
+  }
+}

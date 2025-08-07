@@ -1,0 +1,38 @@
+{
+  "cluster": "rpa-cluster",
+  "serviceName": "rpa-backend-service",
+  "taskDefinition": "rpa-backend",
+  "loadBalancers": [
+    {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:REGION:ACCOUNT_ID:targetgroup/rpa-backend/xxxxxxxx",
+      "containerName": "rpa-backend",
+      "containerPort": 3000
+    }
+  ],
+  "desiredCount": 2,
+  "launchType": "FARGATE",
+  "platformVersion": "LATEST",
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "subnets": [
+        "subnet-xxxxxxxxx",
+        "subnet-yyyyyyyyy"
+      ],
+      "securityGroups": [
+        "sg-xxxxxxxxx"
+      ],
+      "assignPublicIp": "DISABLED"
+    }
+  },
+  "deploymentConfiguration": {
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 50,
+    "deploymentCircuitBreaker": {
+      "enable": true,
+      "rollback": true
+    }
+  },
+  "enableECSManagedTags": true,
+  "propagateTags": "SERVICE",
+  "enableExecuteCommand": true
+}
