@@ -598,7 +598,7 @@ export class AppController {
         { action: 'wait', data: { duration: 2000 } },
       ];
 
-      const jobs = [];
+      const jobs: any[] = [];
       for (const step of steps) {
         const job = await this.bullMqService.addJob(sessionId, step);
         jobs.push({ step, jobId: job.id });
@@ -678,7 +678,7 @@ export class AppController {
   async cleanupAllTestData(): Promise<any> {
     try {
       const activeSessions = await this.redisService.getActiveSessions();
-      const cleanupResults = [];
+      const cleanupResults: any[] = [];
 
       for (const sessionId of activeSessions) {
         if (sessionId.startsWith('test-') || sessionId.startsWith('workflow-') || sessionId.startsWith('crash-')) {

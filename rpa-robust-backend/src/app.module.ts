@@ -17,5 +17,6 @@ import { PlaywrightService } from './playwright/playwright.service';
     AppService,
     PlaywrightService,
   ],
+  exports: [EventsModule],
 })
 export class AppModule {}

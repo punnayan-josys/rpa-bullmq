@@ -26,7 +26,7 @@ export class PlaywrightService implements OnModuleInit, OnModuleDestroy {
     private readonly eventsGateway: EventsGateway,
   ) {
     this.managerId = uuidv4();
-    this.maxWorkers = parseInt(process.env.MAX_WORKERS_PER_CONTAINER) || 5;
+    this.maxWorkers = parseInt(process.env.MAX_WORKERS_PER_CONTAINER || '5', 10);
     this.logger.log(`Worker Manager initialized with ID: ${this.managerId}, Max Workers: ${this.maxWorkers}`);
   }
 
@@ -123,10 +123,8 @@ export class PlaywrightService implements OnModuleInit, OnModuleDestroy {
           return await this.processRpaStep(job, sessionId);
         },
         {
-          connection: queue.connection,
+          connection: this.bullMqService['redis'], // This redis instance now has maxRetriesPerRequest: null
           concurrency: 1, // Ensure FIFO processing
-          removeOnComplete: 100,
-          removeOnFail: 50,
         }
       );
 

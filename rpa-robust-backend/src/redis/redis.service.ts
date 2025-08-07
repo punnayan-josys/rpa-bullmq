@@ -14,18 +14,16 @@ export class RedisService implements OnModuleDestroy {
     // Main Redis client for commands
     this.redis = new Redis({
       host: process.env.REDIS_HOST || 'localhost',
-      port: parseInt(process.env.REDIS_PORT) || 6379,
-      password: process.env.REDIS_PASSWORD,
-      retryDelayOnFailover: 100,
+      port: parseInt(process.env.REDIS_PORT || '6379', 10),
+      password: process.env.REDIS_PASSWORD || undefined,
       maxRetriesPerRequest: 3,
     });
 
     // Separate Redis client for Pub/Sub
     this.redisSub = new Redis({
       host: process.env.REDIS_HOST || 'localhost',
-      port: parseInt(process.env.REDIS_PORT) || 6379,
-      password: process.env.REDIS_PASSWORD,
-      retryDelayOnFailover: 100,
+      port: parseInt(process.env.REDIS_PORT || '6379', 10),
+      password: process.env.REDIS_PASSWORD || undefined,
       maxRetriesPerRequest: 3,
     });
 
